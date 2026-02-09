@@ -1,0 +1,134 @@
+/* ── Reset ─────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #2a0a1a 0%, #0d0208 100%);
+  font-family: 'Georgia', serif;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+canvas { display: block; }
+
+/* ── Loading indicator ────────────────────────────────── */
+#loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffb6c1;
+  font-size: 1.2rem;
+  z-index: 50;
+  text-shadow: 0 0 20px rgba(255, 105, 135, 0.6);
+}
+
+/* ── Instruction tooltip ──────────────────────────────── */
+#instruction {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 80px);
+  color: #ffb6c1;
+  font-size: 1.2rem;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1s;
+  text-shadow: 0 0 20px rgba(255, 105, 135, 0.6);
+  z-index: 10;
+}
+#instruction.hidden { opacity: 0; }
+
+/* ── Buttons ──────────────────────────────────────────── */
+#buttons {
+  position: fixed;
+  bottom: 40px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  z-index: 20;
+}
+
+.btn {
+  padding: 14px 48px;
+  font-size: 1.3rem;
+  font-family: 'Georgia', serif;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.btn:active { transform: scale(0.95); }
+
+#yesBtn {
+  background: linear-gradient(135deg, #ff6b8a, #ff2d55);
+  color: white;
+  box-shadow: 0 4px 25px rgba(255, 45, 85, 0.5);
+}
+#yesBtn:hover {
+  box-shadow: 0 6px 35px rgba(255, 45, 85, 0.7);
+  transform: scale(1.05);
+}
+
+#noBtn {
+  position: fixed;
+  background: linear-gradient(135deg, #888, #555);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: none;
+}
+
+/* ── Celebration overlay ──────────────────────────────── */
+#celebration {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+}
+#celebration.active { display: flex; }
+
+#celebration .msg {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow:
+    0 0 30px rgba(255, 105, 135, 0.8),
+    0 0 60px rgba(255, 50, 80, 0.5);
+  animation: popIn 0.6s ease-out;
+  text-align: center;
+  padding: 20px;
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Falling heart particles ──────────────────────────── */
+.heart-particle {
+  position: fixed;
+  font-size: 1.5rem;
+  pointer-events: none;
+  z-index: 99;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .btn              { padding: 12px 36px; font-size: 1.1rem; }
+  #instruction      { font-size: 1rem; }
+  #celebration .msg { font-size: 1.8rem; }
+}
